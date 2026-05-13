@@ -1,0 +1,1759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeCraft Academy — 2-Month Tech Bootcamp</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0d9488;
+            --primary-dark: #0f766e;
+            --primary-light: #ccfbf1;
+            --accent: #f59e0b;
+            --accent-light: #fef3c7;
+            --bg: #f8fafc;
+            --bg-white: #ffffff;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-accent {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-accent:hover {
+            background: #d97706;
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, #f0fdfa 0%, #f8fafc 50%, #fff7ed 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            right: -5%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--primary-light) 0%, transparent 70%);
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            left: -5%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--accent-light) 0%, transparent 70%);
+            border-radius: 50%;
+            opacity: 0.5;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+            position: relative;
+        }
+
+        .hero h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: var(--accent-light);
+            z-index: -1;
+            border-radius: 4px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .hero-visual {
+            position: relative;
+        }
+
+        .hero-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            z-index: 2;
+        }
+
+        .price-tag {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .price-tag .currency {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .price-tag .amount {
+            font-size: 3rem;
+            font-weight: 800;
+        }
+
+        .price-tag .period {
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+
+        .hero-features {
+            list-style: none;
+        }
+
+        .hero-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+
+        .hero-features li:last-child {
+            border-bottom: none;
+        }
+
+        .hero-features i {
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .floating-shape {
+            position: absolute;
+            border-radius: 1rem;
+            opacity: 0.8;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape-1 {
+            width: 80px;
+            height: 80px;
+            background: var(--accent);
+            top: -20px;
+            right: -20px;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            bottom: 20px;
+            left: -30px;
+            animation-delay: 2s;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            padding: 0.35rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* Courses Section */
+        .courses {
+            background: white;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .course-card {
+            background: var(--bg);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .course-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .course-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .course-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .course-card:nth-child(1) .course-icon { background: #dbeafe; color: #2563eb; }
+        .course-card:nth-child(2) .course-icon { background: #dcfce7; color: #16a34a; }
+        .course-card:nth-child(3) .course-icon { background: #fef3c7; color: #d97706; }
+        .course-card:nth-child(4) .course-icon { background: #fce7f3; color: #db2777; }
+        .course-card:nth-child(5) .course-icon { background: #e0e7ff; color: #4f46e5; }
+
+        .course-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .course-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .course-meta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .course-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.875rem;
+            color: var(--text-light);
+            background: white;
+            padding: 0.35rem 0.75rem;
+            border-radius: 0.5rem;
+        }
+
+        .course-meta i {
+            color: var(--primary);
+        }
+
+        .course-price {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .course-price .price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        /* Course Detail Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 1.5rem;
+            max-width: 700px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalIn 0.3s ease;
+        }
+
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-header {
+            padding: 2rem 2rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .modal-close {
+            background: var(--bg);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--text);
+            transition: all 0.3s;
+        }
+
+        .modal-close:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .modal-body {
+            padding: 1.5rem 2rem 2rem;
+        }
+
+        .modal-body h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-body p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .syllabus-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .syllabus-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .syllabus-list li i {
+            color: var(--primary);
+        }
+
+        .modal-footer {
+            padding: 1.5rem 2rem 2rem;
+            display: flex;
+            gap: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Registration Section */
+        .registration {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--bg-white) 100%);
+        }
+
+        .reg-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .reg-info h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .reg-info > p {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .reg-steps {
+            list-style: none;
+        }
+
+        .reg-steps li {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .step-num {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .step-content p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .reg-form-wrapper {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .reg-form-wrapper h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .reg-form-wrapper > p {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s;
+            background: var(--bg);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .payment-methods {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .payment-method {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 0.75rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .payment-method:hover,
+        .payment-method.active {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .payment-method i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .payment-method span {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .total-box {
+            background: var(--primary-light);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .total-box span {
+            font-weight: 600;
+        }
+
+        .total-box .total-price {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .btn-full {
+            width: 100%;
+            justify-content: center;
+            padding: 1rem;
+            font-size: 1.1rem;
+        }
+
+        /* Success Modal */
+        .success-modal .modal {
+            text-align: center;
+            max-width: 500px;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: #dcfce7;
+            color: #16a34a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 1.5rem;
+        }
+
+        .id-card {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+
+        .id-card h4 {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .id-card .id-number {
+            font-size: 2rem;
+            font-weight: 800;
+            font-family: monospace;
+            letter-spacing: 2px;
+        }
+
+        .id-card .id-name {
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .id-card .id-course {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* Features Section */
+        .features {
+            background: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin: 0 auto 1.5rem;
+        }
+
+        .feature-item h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-item p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: var(--bg);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .testimonial-card .stars {
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-card p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .author-info h4 {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .author-info span {
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-brand .logo {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .footer-brand p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        .footer-links h4 {
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--text);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: var(--shadow-lg);
+            z-index: 3000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast i {
+            color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero-container,
+            .reg-container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 1rem 2rem;
+                box-shadow: var(--shadow);
+                gap: 1rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                padding-top: 6rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .modal-footer {
+                flex-direction: column;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-code"></i>
+                CodeCraft Academy
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#features">Why Us</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#register" class="btn btn-primary">Register Now</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-rocket"></i>
+                    Next Cohort Starts Soon
+                </div>
+                <h1>Launch Your Tech Career in <span>2 Months</span></h1>
+                <p>Join Ghana's most practical tech bootcamp. Master in-demand skills with hands-on projects, expert mentorship, and a community that pushes you forward.</p>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="#register" class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2rem;">
+                        <i class="fas fa-user-plus"></i>
+                        Register Now — ₵500
+                    </a>
+                    <a href="#courses" class="btn btn-outline" style="font-size: 1.1rem; padding: 1rem 2rem;">
+                        Explore Courses
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Courses</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">2</div>
+                        <div class="stat-label">Months</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Graduates</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Satisfaction</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card">
+                    <div class="price-tag">
+                        <div class="currency">Registration Fee</div>
+                        <div class="amount">₵500</div>
+                        <div class="period">per course • Fixed price</div>
+                    </div>
+                    <ul class="hero-features">
+                        <li><i class="fas fa-check-circle"></i> Expert-led live sessions</li>
+                        <li><i class="fas fa-check-circle"></i> Real-world portfolio projects</li>
+                        <li><i class="fas fa-check-circle"></i> 1-on-1 mentorship support</li>
+                        <li><i class="fas fa-check-circle"></i> Job placement assistance</li>
+                        <li><i class="fas fa-check-circle"></i> Lifetime community access</li>
+                        <li><i class="fas fa-check-circle"></i> Certificate of completion</li>
+                    </ul>
+                </div>
+                <div class="floating-shape shape-1"></div>
+                <div class="floating-shape shape-2"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="courses" id="courses">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Our Curriculum</span>
+                <h2>5 Career-Ready Courses</h2>
+                <p>Each course is designed to take you from beginner to job-ready in just 2 months. Click any course to see the full syllabus.</p>
+            </div>
+            <div class="courses-grid" id="coursesGrid">
+                <!-- Courses injected by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Detail Modal -->
+    <div class="modal-overlay" id="courseModal">
+        <div class="modal">
+            <div class="modal-header">
+                <div id="modalHeaderContent"></div>
+                <button class="modal-close" onclick="closeModal('courseModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('courseModal')">Close</button>
+                <a href="#register" class="btn btn-primary" onclick="closeModal('courseModal')">
+                    <i class="fas fa-user-plus"></i> Register for this Course
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Why Choose Us</span>
+                <h2>Everything You Need to Succeed</h2>
+                <p>We don't just teach code — we build careers.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-item fade-in">
+                    <div class="feature-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <h3>Expert Instructors</h3>
+                    <p>Learn from industry professionals with years of real-world experience.</p>
+                </div>
+                <div class="feature-item fade-in">
+                    <div class="feature-icon"><i class="fas fa-laptop-code"></i></div>
+                    <h3>Hands-On Projects</h3>
+                    <p>Build a portfolio of real projects that employers actually want to see.</p>
+                </div>
+                <div class="feature-item fade-in">
+                    <div class="feature-icon"><i class="fas fa-users"></i></div>
+                    <h3>Peer Community</h3>
+                    <p>Join a network of motivated learners. Collaborate, share, and grow together.</p>
+                </div>
+                <div class="feature-item fade-in">
+                    <div class="feature-icon"><i class="fas fa-briefcase"></i></div>
+                    <h3>Job Support</h3>
+                    <p>Resume reviews, interview prep, and direct connections to hiring partners.</p>
+                </div>
+                <div class="feature-item fade-in">
+                    <div class="feature-icon"><i class="fas fa-certificate"></i></div>
+                    <h3>Certified</h3>
+                    <p>Earn a recognized certificate to showcase your new skills.</p>
+                </div>
+                <div class="feature-item fade-in">
+                    <div class="feature-icon"><i class="fas fa-infinity"></i></div>
+                    <h3>Lifetime Access</h3>
+                    <p>Come back anytime to refresh your skills. The community is yours forever.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Success Stories</span>
+                <h2>Hear From Our Graduates</h2>
+                <p>Real people, real transformations, real careers.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card fade-in">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p>"The Web Development course completely changed my life. Within 3 months of graduating, I landed my first developer job at a startup in Accra."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">KA</div>
+                        <div class="author-info">
+                            <h4>Kwame Asante</h4>
+                            <span>Frontend Developer @ TechNova</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-in">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p>"I came in with zero coding knowledge. The instructors were patient, the projects were practical, and the community kept me motivated."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AM</div>
+                        <div class="author-info">
+                            <h4>Ama Mensah</h4>
+                            <span>Data Analyst @ Stanbic Bank</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-in">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p>"Best investment I ever made. The UX Design course gave me a solid foundation and a portfolio that got me freelance clients immediately."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">DO</div>
+                        <div class="author-info">
+                            <h4>David Owusu</h4>
+                            <span>UX Designer @ Fintech Startup</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section class="registration" id="register">
+        <div class="container">
+            <div class="reg-container">
+                <div class="reg-info fade-in">
+                    <span class="section-tag">Get Started</span>
+                    <h2>Ready to Transform Your Career?</h2>
+                    <p>Registration is simple and takes less than 5 minutes. Secure your spot today.</p>
+                    <ul class="reg-steps">
+                        <li>
+                            <div class="step-num">1</div>
+                            <div class="step-content">
+                                <h4>Fill the Form</h4>
+                                <p>Enter your details and select your preferred course.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="step-num">2</div>
+                            <div class="step-content">
+                                <h4>Make Payment</h4>
+                                <p>Pay the ₵500 registration fee via Mobile Money or Card.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="step-num">3</div>
+                            <div class="step-content">
+                                <h4>Get Your ID</h4>
+                                <p>Receive your unique Student ID and welcome pack instantly.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="step-num">4</div>
+                            <div class="step-content">
+                                <h4>Start Learning</h4>
+                                <p>Join your cohort and begin your transformation journey.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="reg-form-wrapper fade-in">
+                    <h3>Register Now</h3>
+                    <p>Complete your registration in minutes</p>
+                    <form id="registrationForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input type="text" id="firstName" placeholder="John" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input type="text" id="lastName" placeholder="Doe" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" id="email" placeholder="john@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" id="phone" placeholder="+233 XX XXX XXXX" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Select Course</label>
+                            <select id="courseSelect" required>
+                                <option value="">Choose a course...</option>
+                                <option value="web-dev">Web Development</option>
+                                <option value="data-science">Data Science & Analytics</option>
+                                <option value="ux-design">UX/UI Design</option>
+                                <option value="mobile-dev">Mobile App Development</option>
+                                <option value="cloud-devops">Cloud & DevOps</option>
+                            </select>
+                        </div>
+
+                        <label style="font-weight: 600; font-size: 0.9rem; margin-bottom: 0.75rem; display: block;">Payment Method</label>
+                        <div class="payment-methods">
+                            <div class="payment-method active" data-method="momo" onclick="selectPayment(this)">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>Mobile Money</span>
+                            </div>
+                            <div class="payment-method" data-method="card" onclick="selectPayment(this)">
+                                <i class="fas fa-credit-card"></i>
+                                <span>Card Payment</span>
+                            </div>
+                            <div class="payment-method" data-method="bank" onclick="selectPayment(this)">
+                                <i class="fas fa-university"></i>
+                                <span>Bank Transfer</span>
+                            </div>
+                        </div>
+
+                        <div class="total-box">
+                            <span>Total Registration Fee</span>
+                            <div class="total-price">₵500.00</div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-full" id="submitBtn">
+                            <i class="fas fa-lock"></i>
+                            Complete Registration & Pay ₵500
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Modal -->
+    <div class="modal-overlay success-modal" id="successModal">
+        <div class="modal">
+            <div style="padding: 2.5rem 2rem 1rem;">
+                <div class="success-icon">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h2 style="font-size: 1.75rem; margin-bottom: 0.5rem;">Registration Successful!</h2>
+                <p style="color: var(--text-light);">Welcome to CodeCraft Academy. Your spot is secured.</p>
+
+                <div class="id-card">
+                    <h4>Your Student ID</h4>
+                    <div class="id-number" id="studentId">CCA-2026-0000</div>
+                    <div class="id-name" id="idName">John Doe</div>
+                    <div class="id-course" id="idCourse">Web Development</div>
+                </div>
+
+                <p style="color: var(--text-light); font-size: 0.95rem;">
+                    A confirmation email has been sent to <strong id="idEmail">john@example.com</strong>.<br>
+                    Please save your Student ID — you'll need it for all academy activities.
+                </p>
+            </div>
+            <div style="padding: 0 2rem 2rem;">
+                <button class="btn btn-primary btn-full" onclick="closeModal('successModal')">
+                    <i class="fas fa-download"></i> Download Receipt
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <i class="fas fa-code"></i>
+                    CodeCraft Academy
+                </a>
+                <p>Empowering the next generation of Ghanaian tech talent through practical, hands-on education.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Courses</h4>
+                <ul>
+                    <li><a href="#courses">Web Development</a></li>
+                    <li><a href="#courses">Data Science</a></li>
+                    <li><a href="#courses">UX/UI Design</a></li>
+                    <li><a href="#courses">Mobile Development</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Connect</h4>
+                <ul>
+                    <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                    <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 CodeCraft Academy. All rights reserved. Built with passion in Ghana.</p>
+        </div>
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <i class="fas fa-info-circle"></i>
+        <span id="toastMessage">Notification</span>
+    </div>
+
+    <script>
+        // Course Data
+        const courses = [
+            {
+                id: 'web-dev',
+                title: 'Web Development',
+                icon: 'fa-globe',
+                description: 'Master HTML, CSS, JavaScript, React, and Node.js. Build full-stack applications from scratch.',
+                duration: '8 Weeks',
+                level: 'Beginner Friendly',
+                projects: '4 Portfolio Projects',
+                price: '₵500',
+                color: '#2563eb',
+                syllabus: [
+                    'Week 1-2: HTML5, CSS3 & Responsive Design',
+                    'Week 3: JavaScript Fundamentals & DOM Manipulation',
+                    'Week 4: React.js Components & State Management',
+                    'Week 5: Backend with Node.js & Express',
+                    'Week 6: Databases with MongoDB & SQL',
+                    'Week 7: Authentication, APIs & Deployment',
+                    'Week 8: Capstone Project & Portfolio Building'
+                ]
+            },
+            {
+                id: 'data-science',
+                title: 'Data Science & Analytics',
+                icon: 'fa-chart-line',
+                description: 'Learn Python, data analysis, visualization, machine learning, and predictive modeling.',
+                duration: '8 Weeks',
+                level: 'Beginner Friendly',
+                projects: '3 Real-World Projects',
+                price: '₵500',
+                color: '#16a34a',
+                syllabus: [
+                    'Week 1-2: Python for Data Science & Pandas',
+                    'Week 3: Data Cleaning & Preprocessing',
+                    'Week 4: Data Visualization with Matplotlib & Seaborn',
+                    'Week 5: Statistical Analysis & Hypothesis Testing',
+                    'Week 6: Introduction to Machine Learning',
+                    'Week 7: Supervised & Unsupervised Learning',
+                    'Week 8: Final Project & Model Deployment'
+                ]
+            },
+            {
+                id: 'ux-design',
+                title: 'UX/UI Design',
+                icon: 'fa-pen-nib',
+                description: 'Design beautiful, user-centered interfaces. Master Figma, prototyping, and design systems.',
+                duration: '8 Weeks',
+                level: 'Beginner Friendly',
+                projects: '5 Design Projects',
+                price: '₵500',
+                color: '#d97706',
+                syllabus: [
+                    'Week 1-2: Design Thinking & User Research',
+                    'Week 3: Wireframing & Information Architecture',
+                    'Week 4: Visual Design Principles & Color Theory',
+                    'Week 5: Figma Mastery & Component Systems',
+                    'Week 6: Prototyping & Micro-interactions',
+                    'Week 7: Usability Testing & Iteration',
+                    'Week 8: Design Portfolio & Case Studies'
+                ]
+            },
+            {
+                id: 'mobile-dev',
+                title: 'Mobile App Development',
+                icon: 'fa-mobile-alt',
+                description: 'Build cross-platform mobile apps with React Native. Deploy to iOS and Android stores.',
+                duration: '8 Weeks',
+                level: 'Intermediate',
+                projects: '3 Mobile Apps',
+                price: '₵500',
+                color: '#db2777',
+                syllabus: [
+                    'Week 1-2: React Native Fundamentals & Setup',
+                    'Week 3: Navigation, Components & Styling',
+                    'Week 4: State Management with Redux',
+                    'Week 5: API Integration & Data Fetching',
+                    'Week 6: Native Device Features (Camera, GPS, etc.)',
+                    'Week 7: Testing, Debugging & Performance',
+                    'Week 8: App Store Deployment & Monetization'
+                ]
+            },
+            {
+                id: 'cloud-devops',
+                title: 'Cloud & DevOps',
+                icon: 'fa-cloud',
+                description: 'Master AWS, Docker, Kubernetes, CI/CD pipelines, and infrastructure as code.',
+                duration: '8 Weeks',
+                level: 'Intermediate',
+                projects: '4 Infrastructure Projects',
+                price: '₵500',
+                color: '#4f46e5',
+                syllabus: [
+                    'Week 1-2: Linux Fundamentals & Shell Scripting',
+                    'Week 3: Git, GitHub & Version Control Workflows',
+                    'Week 4: Docker Containers & Docker Compose',
+                    'Week 5: AWS Core Services (EC2, S3, RDS)',
+                    'Week 6: Kubernetes & Container Orchestration',
+                    'Week 7: CI/CD Pipelines with GitHub Actions',
+                    'Week 8: Infrastructure as Code with Terraform'
+                ]
+            }
+        ];
+
+        // Render Courses
+        function renderCourses() {
+            const grid = document.getElementById('coursesGrid');
+            grid.innerHTML = courses.map(course => `
+                <div class="course-card" onclick="openCourseModal('${course.id}')">
+                    <div class="course-icon"><i class="fas ${course.icon}"></i></div>
+                    <h3>${course.title}</h3>
+                    <p>${course.description}</p>
+                    <div class="course-meta">
+                        <span><i class="fas fa-clock"></i> ${course.duration}</span>
+                        <span><i class="fas fa-signal"></i> ${course.level}</span>
+                        <span><i class="fas fa-folder"></i> ${course.projects}</span>
+                    </div>
+                    <div class="course-price">
+                        <span style="color: var(--text-light); font-size: 0.9rem;">Registration Fee</span>
+                        <span class="price">${course.price}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Modal Functions
+        function openCourseModal(courseId) {
+            const course = courses.find(c => c.id === courseId);
+            if (!course) return;
+
+            document.getElementById('modalHeaderContent').innerHTML = `
+                <div class="course-icon" style="background: ${course.color}20; color: ${course.color}; width: 70px; height: 70px; font-size: 1.75rem;">
+                    <i class="fas ${course.icon}"></i>
+                </div>
+            `;
+
+            document.getElementById('modalBody').innerHTML = `
+                <h3>${course.title}</h3>
+                <p>${course.description}</p>
+                <div class="course-meta" style="margin-bottom: 1.5rem;">
+                    <span><i class="fas fa-clock" style="color: ${course.color};"></i> ${course.duration}</span>
+                    <span><i class="fas fa-signal" style="color: ${course.color};"></i> ${course.level}</span>
+                    <span><i class="fas fa-folder" style="color: ${course.color};"></i> ${course.projects}</span>
+                </div>
+                <h4 style="margin-bottom: 1rem; font-size: 1.1rem;">Course Syllabus</h4>
+                <ul class="syllabus-list">
+                    ${course.syllabus.map(item => `<li><i class="fas fa-check-circle" style="color: ${course.color};"></i> ${item}</li>`).join('')}
+                </ul>
+                <div style="background: var(--primary-light); padding: 1.25rem; border-radius: 0.75rem; display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div style="font-size: 0.875rem; color: var(--text-light);">Registration Fee</div>
+                        <div style="font-size: 1.5rem; font-weight: 800; color: var(--primary);">₵500</div>
+                    </div>
+                    <div style="font-size: 0.875rem; color: var(--text-light); text-align: right;">
+                        <div>2-Month Program</div>
+                        <div>Certificate Included</div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('courseModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on overlay click
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+
+        // Payment Selection
+        function selectPayment(el) {
+            document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        // Generate Student ID
+        function generateStudentId() {
+            const year = new Date().getFullYear();
+            const random = Math.floor(1000 + Math.random() * 9000);
+            return `CCA-${year}-${random}`;
+        }
+
+        // Show Toast
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // Form Submission
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const courseSelect = document.getElementById('courseSelect');
+            const courseName = courseSelect.options[courseSelect.selectedIndex].text;
+
+            const btn = document.getElementById('submitBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing Payment...';
+            btn.disabled = true;
+
+            // Simulate payment processing
+            setTimeout(() => {
+                const studentId = generateStudentId();
+
+                document.getElementById('studentId').textContent = studentId;
+                document.getElementById('idName').textContent = `${firstName} ${lastName}`;
+                document.getElementById('idCourse').textContent = courseName;
+                document.getElementById('idEmail').textContent = email;
+
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+
+                document.getElementById('successModal').classList.add('active');
+                document.body.style.overflow = 'hidden';
+
+                // Reset form
+                this.reset();
+
+                showToast('Registration completed successfully!');
+            }, 2000);
+        });
+
+        // Mobile Menu
+        document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    document.getElementById('navLinks').classList.remove('active');
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.08)';
+            } else {
+                navbar.style.boxShadow = 'none';
+            }
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Initialize
+        renderCourses();
+    </script>
+</body>
+</html>
